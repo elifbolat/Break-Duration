@@ -1,0 +1,101 @@
+Sub CalculateBreakDuration()
+    Dim lastRow As Long
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Sheets("Sheet1")
+
+    lastRow = ws.Cells(ws.Rows.Count, "M").End(xlUp).Row
+
+    Dim i As Long
+    For i = 2 To lastRow
+        If ws.Cells(i, "M").Value = "Start" And ws.Cells(i + 1, "M").Value = "End" And ws.Cells(i, "G").Value = ws.Cells(i + 1, "G").Value Then
+            Dim entryTime As Date
+            Dim exitTime As Date
+            entryTime = ws.Cells(i, "H").Value
+            exitTime = ws.Cells(i + 1, "H").Value
+            ws.Cells(i + 1, "O").Value = (exitTime - entryTime) * 24 * 60
+            
+        
+            Dim startTime As Date
+            Dim endTime As Date
+            
+            ' 11:00 - 13:00
+            startTime = TimeValue("11:00:00")
+            endTime = TimeValue("13:00:00")
+            If entryTime >= startTime And exitTime <= endTime Then
+                ws.Cells(i + 1, "P").Value = (exitTime - entryTime) * 24 * 60
+                ws.Cells(i + 1, "Q").Value = "Break"
+            End If
+            
+            ' 19:00 - 21:00
+            startTime = TimeValue("19:00:00")
+            endTime = TimeValue("21:00:00")
+            If entryTime >= startTime And exitTime <= endTime Then
+                ws.Cells(i + 1, "P").Value = (exitTime - entryTime) * 24 * 60 
+                ws.Cells(i + 1, "Q").Value = "Break"
+            End If
+            
+            ' 03:00 - 05:00
+            startTime = TimeValue("03:00:00")
+            endTime = TimeValue("05:00:00")
+            If entryTime >= startTime And exitTime <= endTime Then
+                ws.Cells(i + 1, "P").Value = (exitTime - entryTime) * 24 * 60 
+                ws.Cells(i + 1, "Q").Value = "Break"
+            End If
+            
+        ElseIf ws.Cells(i, "M").Value = "Start" And ws.Cells(i + 1, "M").Value = "Start" Then
+            ws.Cells(i + 1, "O").Value = "No Data"
+        End If
+    Next i
+End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+www.ShareAppsCrack.com
